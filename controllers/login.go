@@ -10,18 +10,17 @@ type LoginController struct {
 }
 
 type Credentials struct {
-	username string
-	password string
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 func (c *LoginController) Post() {
-	username := c.Ctx.Input.Request.Form.Get("username")
-	password := c.Ctx.Input.Request.Form.Get("password")
+	x := Credentials{c.GetString("username"), c.GetString("password")}
 
 	c.Data["json"] = &x
 	// TODO:Hey jude
 	// l := logs.GetLogger()
-	// l.Println(x.ServerStatus)
+	// l.Println(x)
 
 	c.ServeJSON()
 }

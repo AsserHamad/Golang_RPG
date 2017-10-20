@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"new_project/controllers"
+	"Golang_RPG/controllers"
 
 	"github.com/astaxie/beego"
 )

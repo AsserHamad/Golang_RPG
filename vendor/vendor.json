@@ -1,0 +1,31 @@
+{
+	"comment": "",
+	"ignore": "",
+	"package": [
+		{
+			"checksumSHA1": "5I634iPeDlSRAe+6J6P/uQlKg+w=",
+			"path": "github.com/astaxie/beego/logs",
+			"revision": "c5118e9535f237996bae7c7baebe4ed4247cb2c6",
+			"revisionTime": "2017-10-14T08:28:56Z"
+		},
+		{
+			"checksumSHA1": "PMJUQ+G6UaF17dYC1S0ijiXdby4=",
+			"path": "github.com/astaxie/beego/session",
+			"revision": "c5118e9535f237996bae7c7baebe4ed4247cb2c6",
+			"revisionTime": "2017-10-14T08:28:56Z"
+		},
+		{
+			"checksumSHA1": "5hIqZ6KxaTpsPMGtLYSGmQYds24=",
+			"path": "github.com/heppu/simple-cors",
+			"revision": "543cdec07e0c196abd48c5d966c0a0684cc47308",
+			"revisionTime": "2017-03-13T07:41:01Z"
+		},
+		{
+			"checksumSHA1": "klQ0wW7q4yvBuZ7Q36LTTRfwzFk=",
+			"path": "github.com/ramin0/chatbot",
+			"revision": "c9bb79785b0225cdb629db50037d11361d8c0bed",
+			"revisionTime": "2017-09-22T23:21:59Z"
+		}
+	],
+	"rootPath": "Golang_RPG"
+}

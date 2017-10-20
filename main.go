@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "new_project/routers"
+	_ "Golang_RPG/routers"
 	"github.com/astaxie/beego"
 )
 
