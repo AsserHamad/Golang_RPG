@@ -1,8 +1,12 @@
 package controllers
 
 import (
+	"fmt"
+	"math/rand"
+
+	"github.com/astaxie/beego/logs"
+
 	"github.com/astaxie/beego"
-	// "github.com/astaxie/beego/logs"
 )
 
 //MainController controls the root API functions
@@ -22,13 +26,27 @@ type Welcome struct {
 
 //Get gets
 func (c *MainController) Get() {
-	println("I'm a little teapot short and stout")
-	options := []string{"Yes", "No"}
-	x := Welcome{true, "Welcome adventurer! Did you happen to visit this realm before?", options}
-	c.Data["json"] = &x
-	// TODO:Hey jude don't forget to uncomment
-	// l := logs.GetLogger()
-	// l.Println(x.ServerStatus)
+	if c.GetSession("userId") == nil {
+		options := []string{"Yes", "No"}
+		x := Welcome{true, "Welcome adventurer! Did you happen to visit this realm before?", options}
+		// userID := session.Get("UserID")
+
+		c.SetSession("userId", rand.Intn(1000))
+		// }
+
+		c.Data["json"] = &x
+		// // TODO:Hey jude don't forget to uncomment
+		// // l := logs.GetLogger()
+		// // l.Println(x.ServerStatus)
+
+	} else {
+		options := []string{"Continue"}
+		l := logs.GetLogger()
+		l.Println(c.GetSession("userId"))
+		y := fmt.Sprintf("Welcome, %d", c.GetSession("userId").(int))
+		x := Welcome{true, y, options}
+		c.Data["json"] = &x
+	}
 
 	c.ServeJSON()
 }

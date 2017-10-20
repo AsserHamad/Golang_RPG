@@ -9,12 +9,6 @@
 			"revisionTime": "2017-10-14T08:28:56Z"
 		},
 		{
-			"checksumSHA1": "PMJUQ+G6UaF17dYC1S0ijiXdby4=",
-			"path": "github.com/astaxie/beego/session",
-			"revision": "c5118e9535f237996bae7c7baebe4ed4247cb2c6",
-			"revisionTime": "2017-10-14T08:28:56Z"
-		},
-		{
 			"checksumSHA1": "5hIqZ6KxaTpsPMGtLYSGmQYds24=",
 			"path": "github.com/heppu/simple-cors",
 			"revision": "543cdec07e0c196abd48c5d966c0a0684cc47308",
