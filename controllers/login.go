@@ -5,16 +5,19 @@ import (
 	// "github.com/astaxie/beego/logs"
 )
 
-type MainController struct {
+type LoginController struct {
 	beego.Controller
 }
 
-type Welcome struct {
-	ServerStatus bool `json:"serverStatus"`
+type Credentials struct {
+	username string
+	password string
 }
 
-func (c *MainController) Get() {
-	x := Welcome{true}
+func (c *LoginController) Post() {
+	username := c.Ctx.Input.Request.Form.Get("username")
+	password := c.Ctx.Input.Request.Form.Get("password")
+
 	c.Data["json"] = &x
 	// TODO:Hey jude
 	// l := logs.GetLogger()
