@@ -9,3 +9,6 @@ go get github.com/beego/bee
 
 #Govender simulates package.json and helps in installing the required packages
 go get -u github.com/kardianos/govendor
+
+#MySQL Database driver vroom vroom
+go get -u github.com/go-sql-driver/mysql
