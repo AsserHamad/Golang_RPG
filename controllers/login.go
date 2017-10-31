@@ -3,6 +3,8 @@ package controllers
 import (
 	"Golang_RPG/models"
 	"fmt"
+	"strconv"
+	"strings"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
@@ -10,17 +12,22 @@ import (
 	// "github.com/astaxie/beego/logs"
 )
 
+func StrToInt(str string) (int, error) {
+	nonFractionalPart := strings.Split(str, ".")
+	return strconv.Atoi(nonFractionalPart[0])
+}
+
 type LoginController struct {
 	beego.Controller
 }
 
-type Credentials models.Credentials
-
 func (c *LoginController) Post() {
-	x := Credentials{Username: c.GetString("username"), Password: c.GetString("password")}
+	id, _ := StrToInt(c.GetString("id"))
+	x := models.Credentials{Id: id, Username: c.GetString("username"), Password: c.GetString("password")}
 	o := orm.NewOrm()
-	o.Using("default")
-	fmt.Println(o.Insert(x))
+	fmt.Println(o.Insert(&x))
+	fmt.Println(o.(new(models.Credentials)))
+
 	fmt.Println("Added new entry to the DB!")
 	c.Data["json"] = &x
 	// TODO:Hey jude

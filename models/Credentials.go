@@ -1,7 +1,8 @@
 package models
 
+//Credentials for login purposes
 type Credentials struct {
-	Id       int
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Id       int    `orm:"auto"`
+	Username string `orm:"size(100)" ,json:"username"`
+	Password string `orm:"size(100)" ,json:"password"`
 }
