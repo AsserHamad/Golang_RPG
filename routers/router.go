@@ -9,8 +9,10 @@ import (
 )
 
 func init() {
+	// TODO: put initializations in a differnt file
 	orm.RegisterDriver("mysql", orm.DRMySQL)
-	orm.RegisterDataBase("default", "mysql", "root:Pupper1996@/orm_test?charset=utf8")
+	// TODO: add connection string in app.con and unify it on our systems
+	orm.RegisterDataBase("default", "mysql", beego.AppConfig.String("connectionString"))
 	orm.RegisterModel(new(models.Credentials))
 	beego.Router("/api/", &controllers.MainController{})
 	beego.Router("/api/login", &controllers.LoginController{})

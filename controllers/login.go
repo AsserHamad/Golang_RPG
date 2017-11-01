@@ -26,7 +26,6 @@ func (c *LoginController) Post() {
 	x := models.Credentials{Id: id, Username: c.GetString("username"), Password: c.GetString("password")}
 	o := orm.NewOrm()
 	fmt.Println(o.Insert(&x))
-	fmt.Println(o.(new(models.Credentials)))
 
 	fmt.Println("Added new entry to the DB!")
 	c.Data["json"] = &x
