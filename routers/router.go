@@ -7,8 +7,6 @@ import (
 )
 
 func init() {
-	// TODO: put initializations in a differnt file
-
 	beego.Router("/api/", &controllers.MainController{})
 	beego.Router("/api/register", &controllers.RegisterController{})
 	beego.Router("/api/login", &controllers.LoginController{})
