@@ -30,10 +30,13 @@ func (c *LoginController) Post() {
 
 	o := orm.NewOrm()
 	user := models.Users{Username: c.GetString("username"), Password: c.GetString("password")}
-	err := o.Read(&user)
+	err := o.Read(&user, "Username", "Password")
+	user.Password = ""
+
 	if err == orm.ErrNoRows {
 		c.Data["json"] = &errors.WrongCredentials.Message
 	} else {
+		c.SetSession("userId", user.Id)
 		c.Data["json"] = &Success{Message: "Welcome!"}
 	}
 
