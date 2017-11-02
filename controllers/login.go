@@ -38,7 +38,7 @@ func (c *LoginController) Post() {
 		c.Ctx.ResponseWriter.WriteHeader(401)
 
 	} else {
-		c.SetSession("userId", user.Id)
+		c.SetSession("id", user.Id)
 		c.Data["json"] = &Success{Message: "Welcome!"}
 	}
 

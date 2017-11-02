@@ -1,7 +1,11 @@
 package controllers
 
 import (
+	"Golang_RPG/errors"
+	"Golang_RPG/models"
+
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/orm"
 )
 
 type BotController struct {
@@ -12,13 +16,58 @@ type Ayhabal struct {
 }
 
 func (c *BotController) Get() {
-	z := c.GetSession("id")
-	if z != nil {
-		x := Ayhabal{Id: z.(int)}
-		c.Data["json"] = x
+	o := orm.NewOrm()
+	_id := c.GetSession("id")
+	if _id != nil {
+		id := _id.(int)
+		bot := models.Bots{User_id: id}
+		err := o.Read(&bot)
+		if err != nil {
+			c.Data["json"] = &errors.NoBot.Message
+			c.Ctx.ResponseWriter.WriteHeader(401)
+		} else {
+			c.Data["json"] = bot
+		}
 	} else {
-		x := Ayhabal{Id: -1}
-		c.Data["json"] = x
+		c.Data["json"] = &errors.NotLoggedIn.Message
+		c.Ctx.ResponseWriter.WriteHeader(401)
+	}
+	c.ServeJSON()
+}
+
+func (c *BotController) Post() {
+
+	o := orm.NewOrm()
+	_id := c.GetSession("id")
+	if _id != nil {
+		id := _id.(int)
+		_bot := models.Bots{User_id: id}
+		err := o.Read(&_bot)
+		if err != nil {
+			bot := models.Bots{
+				Name:       c.GetString("name"),
+				Race:       c.GetString("race"),
+				Level:      1,
+				User_id:    id,
+				Experience: 1,
+				Attack:     10,
+				Defense:    10,
+				Fakka:      10,
+			}
+			_, err := o.Insert(&bot)
+			if err != nil {
+				c.Data["json"] = &errors.Err{Message: err}
+				c.Ctx.ResponseWriter.WriteHeader(401)
+			} else {
+				c.Data["json"] = &bot
+			}
+		} else {
+			c.Data["json"] = &errors.HaveBot.Message
+			c.Ctx.ResponseWriter.WriteHeader(401)
+		}
+	} else {
+		c.Data["json"] = &errors.NotLoggedIn.Message
+		c.Ctx.ResponseWriter.WriteHeader(401)
 	}
 	c.ServeJSON()
 }
