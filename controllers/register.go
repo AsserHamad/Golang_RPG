@@ -23,7 +23,7 @@ func (c *RegisterController) Post() {
 		Name:     c.GetString("name"),
 		Age:      z,
 	}
-	status, err := o.Insert(&x)
+	_, err := o.Insert(&x)
 	if err != nil {
 
 	}

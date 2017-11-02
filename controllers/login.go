@@ -2,9 +2,10 @@ package controllers
 
 import (
 	"Golang_RPG/models"
-	"fmt"
 	"strconv"
 	"strings"
+
+	"Golang_RPG/errors"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
@@ -21,17 +22,20 @@ type LoginController struct {
 	beego.Controller
 }
 
-func (c *LoginController) Post() {
-	id, _ := StrToInt(c.GetString("id"))
-	x := models.Credentials{Id: id, Username: c.GetString("username"), Password: c.GetString("password")}
-	o := orm.NewOrm()
-	fmt.Println(o.Insert(&x))
+type Success struct {
+	Message string `json: message`
+}
 
-	fmt.Println("Added new entry to the DB!")
-	c.Data["json"] = &x
-	// TODO:Hey jude
-	// l := logs.GetLogger()
-	// l.Println(x)
+func (c *LoginController) Post() {
+
+	o := orm.NewOrm()
+	user := models.Users{Username: c.GetString("username"), Password: c.GetString("password")}
+	err := o.Read(&user)
+	if err == orm.ErrNoRows {
+		c.Data["json"] = &errors.WrongCredentials.Message
+	} else {
+		c.Data["json"] = &Success{Message: "Welcome!"}
+	}
 
 	c.ServeJSON()
 }
