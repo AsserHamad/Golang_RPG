@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"fmt"
-	"math/rand"
 
 	"github.com/astaxie/beego/logs"
 
@@ -31,7 +30,6 @@ func (c *MainController) Get() {
 		x := Welcome{true, "Welcome adventurer! Did you happen to visit this realm before?", options}
 		// userID := session.Get("UserID")
 
-		c.SetSession("userId", rand.Intn(1000))
 		// }
 
 		c.Data["json"] = &x
