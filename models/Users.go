@@ -5,5 +5,5 @@ type Users struct {
 	Username string `orm:"size(45)" ,json:"username"`
 	Password string `orm:"size(45)" ,json:"password"`
 	Name     string `orm:"size(45)" ,json:"name"`
-	Age      string `orm:"size(45)" ,json:"age"`
+	Age      int    `json:"age"`
 }

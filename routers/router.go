@@ -13,7 +13,7 @@ func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 	// TODO: add connection string in app.con and unify it on our systems
 	orm.RegisterDataBase("default", "mysql", beego.AppConfig.String("connectionString"))
-	orm.RegisterModel(new(models.Credentials))
+	orm.RegisterModel(new(models.Users))
 	beego.Router("/api/", &controllers.MainController{})
 	beego.Router("/api/register", &controllers.RegisterController{})
 	beego.Router("/api/login", &controllers.LoginController{})

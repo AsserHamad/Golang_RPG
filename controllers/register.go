@@ -9,6 +9,10 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+type myError struct {
+	Message error `json: "message"`
+}
+
 type RegisterController struct {
 	beego.Controller
 }
@@ -17,7 +21,7 @@ func (c *RegisterController) Post() {
 
 	o := orm.NewOrm()
 	z, _ := StrToInt(c.GetString("age"))
-	x := models.RegisterCredentials{
+	x := models.Users{
 		Username: c.GetString("username"),
 		Password: c.GetString("password"),
 		Name:     c.GetString("name"),
@@ -25,15 +29,14 @@ func (c *RegisterController) Post() {
 	}
 	status, err := o.Insert(&x)
 	if err != nil {
-
+		fmt.Println(err)
+		ayesmvariable := myError{Message: err}
+		c.Data["json"] = &ayesmvariable
+	} else {
+		fmt.Println("Added new entry to the DB!")
+		fmt.Println(status)
+		c.Data["json"] = &x
 	}
-	fmt.Println()
-
-	fmt.Println("Added new entry to the DB!")
-	c.Data["json"] = &x
-	// TODO:Hey jude
-	// l := logs.GetLogger()
-	//	 l.Println(x)
 
 	c.ServeJSON()
 }
