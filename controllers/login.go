@@ -35,6 +35,8 @@ func (c *LoginController) Post() {
 
 	if err == orm.ErrNoRows {
 		c.Data["json"] = &errors.WrongCredentials.Message
+		c.Ctx.ResponseWriter.WriteHeader(401)
+
 	} else {
 		c.SetSession("userId", user.Id)
 		c.Data["json"] = &Success{Message: "Welcome!"}
