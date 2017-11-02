@@ -15,5 +15,6 @@ func init() {
 	orm.RegisterDataBase("default", "mysql", beego.AppConfig.String("connectionString"))
 	orm.RegisterModel(new(models.Credentials))
 	beego.Router("/api/", &controllers.MainController{})
+	beego.Router("/api/register", &controllers.RegisterController{})
 	beego.Router("/api/login", &controllers.LoginController{})
 }
