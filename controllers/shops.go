@@ -23,7 +23,7 @@ type Response struct {
 func (c *ShopsController) Get() {
 	latitude, _ := c.GetFloat("latitude")
 	longtitude, _ := c.GetFloat("longtitude")
-	c2, err := maps.NewClient(maps.WithAPIKey(beego.AppConfig.String("googleKey")))
+	c2, err := maps.NewClient(maps.WithAPIKey(beego.AppConfig.String("googlePlacesKey")))
 	r := &maps.NearbySearchRequest{Location: &maps.LatLng{Lat: latitude, Lng: longtitude}, RankBy: "distance", Type: "stadium"}
 	resp, err := c2.NearbySearch(context.Background(), r)
 	if err != nil {
@@ -45,6 +45,7 @@ func (c *ShopsController) Get() {
 				origin              string = c.GetString("latitude") + "," + c.GetString("longtitude")
 			)
 
+			c2, err := maps.NewClient(maps.WithAPIKey(beego.AppConfig.String("googleDistanceKey")))
 			r := &maps.DistanceMatrixRequest{Origins: []string{origin}, Destinations: []string{destination}}
 			resp, err := c2.DistanceMatrix(context.Background(), r)
 			if err != nil {
