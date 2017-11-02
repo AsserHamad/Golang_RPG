@@ -34,11 +34,11 @@ func (c *RegisterController) Post() {
 		c.Data["json"] = &ayesmvariable
 	} else {
 		fmt.Println("Added new entry to the DB!")
-		fmt.Println(status)
 		c.SetSession("id", x.Id)
 		id := c.GetSession("id")
 		fmt.Println("Your new ID iiiiiiiiiis")
 		fmt.Println(id)
+		//TODO: remove this JSON reply
 		c.Data["json"] = &x
 	}
 	c.ServeJSON()
