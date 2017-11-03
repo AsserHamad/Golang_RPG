@@ -22,8 +22,11 @@ func (c *NearestShopItemsController) Get() {
 	} else {
 		o := orm.NewOrm()
 		var shopItems []*models.Shop_Items
-		o.QueryTable("Shop_Items").All(&shopItems)
-		fmt.Println(shopItems)
+		_, err := o.Raw("SELECT * FROM shop_items WHERE location_id = ?", nearestShop).QueryRows(&shopItems)
+		fmt.Println(shopItems[0].Item.Name)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
 		var stringItems []string
 		stringItems = append(stringItems, "[")
 		for _, x := range shopItems {
