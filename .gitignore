@@ -1,2 +1,3 @@
 *.exe
 Golang_RPG
+vendor
