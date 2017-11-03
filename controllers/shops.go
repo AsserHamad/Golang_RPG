@@ -17,7 +17,7 @@ type ShopsController struct {
 }
 
 type Response struct {
-	Message string
+	Message string `json:"message"`
 }
 
 func (c *ShopsController) Get() {
@@ -53,8 +53,16 @@ func (c *ShopsController) Get() {
 				fmt.Println(err.Error())
 				c.Ctx.ResponseWriter.WriteHeader(errors.InvalidParameters.HTTPStatus)
 			} else {
-				fmt.Println(resp.Rows[0].Elements[0].Distance)
-				c.Data["json"] = &Response{Message: "hi"}
+				var distance int = resp.Rows[0].Elements[0].Distance.Meters
+				if distance <= 200 && distance > 5 {
+					var message string = fmt.Sprintf("A nearby shop is located at %d meters away, get closer to access it :)", distance)
+					c.Data["json"] = &Response{Message: message}
+				} else if distance <= 5 {
+					c.Data["json"] = &Response{Message: "A nearby shop is just beside you. Type access to it!"}
+				} else {
+					c.Data["json"] = &Response{Message: "No nearby shops!"}
+
+				}
 			}
 		}
 		c.ServeJSON(true)
