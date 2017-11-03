@@ -14,3 +14,5 @@ type Welcome struct {
 
 * Jojo is the best
 * Sponsored by Papa John's and Rick and Morty
+
+* POSTMAN link: https://www.getpostman.com/collections/346b9169291f2220e5a4
