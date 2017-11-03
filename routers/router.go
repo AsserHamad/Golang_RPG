@@ -11,5 +11,6 @@ func init() {
 	beego.Router("/api/register", &controllers.RegisterController{})
 	beego.Router("/api/login", &controllers.LoginController{})
 	beego.Router("/api/bot", &controllers.BotController{})
-	beego.Router("/api/search", &controllers.ShopsSearchController{}) // searches for nearest shops
+	beego.Router("/api/search", &controllers.ShopsSearchController{})                 // searches for nearest shops
+	beego.Router("/api/shops/nearestshop", &controllers.NearestShopItemsController{}) // uses result from nearest shop search to display items
 }
