@@ -15,26 +15,6 @@ type Ayhabal struct {
 	Id int `json:"id"`
 }
 
-func (c *BotController) Get() {
-	o := orm.NewOrm()
-	_id := c.GetSession("id")
-	if _id != nil {
-		id := _id.(int)
-		bot := models.Bots{User_id: id}
-		err := o.Read(&bot)
-		if err != nil {
-			c.Data["json"] = &errors.ErrorMessage{Message: err.Error()}
-			c.Ctx.ResponseWriter.WriteHeader(401)
-		} else {
-			c.Data["json"] = &bot
-		}
-	} else {
-		c.Data["json"] = &errors.NotLoggedIn.Message
-		c.Ctx.ResponseWriter.WriteHeader(401)
-	}
-	c.ServeJSON()
-}
-
 func (c *BotController) Post() {
 
 	o := orm.NewOrm()

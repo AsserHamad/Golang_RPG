@@ -29,6 +29,8 @@ create table bots
 	skill1_id int NULL,
 	skill2_id int NULL,
 	ultSkill_id int NULL,
+    maxhp int default '1000' not null,
+    maxmp int default '500' not null,
 	foreign key (skill1_id) references skills (id),
 	foreign key (skill2_id) references skills (id),
 	foreign key (ultSkill_id) references skills (id),

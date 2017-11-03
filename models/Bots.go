@@ -10,4 +10,6 @@ type Bots struct {
 	Attack     int    `json:"attack"`
 	Defense    int    `json:"defense"`
 	Fakka      int    `json:"fakka"`
+	Maxhp      int    `json:"maxhp"`
+	Maxmp      int    `json:"maxmp"`
 }
