@@ -23,10 +23,10 @@ func (c *BotController) Get() {
 		bot := models.Bots{User_id: id}
 		err := o.Read(&bot)
 		if err != nil {
-			c.Data["json"] = &errors.NoBot.Message
+			c.Data["json"] = &errors.ErrorMessage{Message: err.Error()}
 			c.Ctx.ResponseWriter.WriteHeader(401)
 		} else {
-			c.Data["json"] = bot
+			c.Data["json"] = &bot
 		}
 	} else {
 		c.Data["json"] = &errors.NotLoggedIn.Message
@@ -45,14 +45,13 @@ func (c *BotController) Post() {
 		err := o.Read(&_bot)
 		if err != nil {
 			bot := models.Bots{
-				Name:       c.GetString("name"),
-				Race:       c.GetString("race"),
-				Level:      1,
-				User_id:    id,
-				Experience: 1,
-				Attack:     10,
-				Defense:    10,
-				Fakka:      10,
+				Name:    c.GetString("name"),
+				Race:    c.GetString("race"),
+				Level:   1,
+				User_id: id,
+				Attack:  10,
+				Defense: 10,
+				Fakka:   10,
 			}
 			_, err := o.Insert(&bot)
 			if err != nil {
