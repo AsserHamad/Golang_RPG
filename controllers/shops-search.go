@@ -12,7 +12,7 @@ import (
 	"googlemaps.github.io/maps"
 )
 
-type ShopsController struct {
+type ShopsSearchController struct {
 	beego.Controller
 }
 
@@ -20,7 +20,7 @@ type Response struct {
 	Message string `json:"message"`
 }
 
-func (c *ShopsController) Get() {
+func (c *ShopsSearchController) Get() {
 	latitude, _ := c.GetFloat("latitude")
 	longtitude, _ := c.GetFloat("longtitude")
 	c2, err := maps.NewClient(maps.WithAPIKey(beego.AppConfig.String("googlePlacesKey")))
@@ -59,6 +59,7 @@ func (c *ShopsController) Get() {
 					c.Data["json"] = &Response{Message: message}
 				} else if distance <= 5 {
 					c.Data["json"] = &Response{Message: "A nearby shop is just beside you. Type access to it!"}
+					c.SetSession("nearShop", location.Id)
 				} else {
 					c.Data["json"] = &Response{Message: "No nearby shops!"}
 
