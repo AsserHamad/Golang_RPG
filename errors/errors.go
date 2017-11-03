@@ -17,3 +17,4 @@ var WrongCredentials = Error{HTTPStatus: 401, Message: ErrorMessage{Message: "Wr
 var NoBot = Error{HTTPStatus: 401, Message: ErrorMessage{Message: "Please create a bot!"}}
 var NotLoggedIn = Error{HTTPStatus: 401, Message: ErrorMessage{Message: "Please log in first"}}
 var HaveBot = Error{HTTPStatus: 401, Message: ErrorMessage{Message: "You already have a bot"}}
+var InvalidParameters = Error{HTTPStatus: 422, Message: ErrorMessage{Message: "Invalid Parameters"}}
