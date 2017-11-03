@@ -33,8 +33,8 @@ func (c *ShopsController) Get() {
 	} else {
 		nearestLocation := resp.Results[0]
 		o := orm.NewOrm()
-		user := models.Locations{Name: nearestLocation.Name}
-		err := o.Read(&user, "Name")
+		location := models.Locations{Name: nearestLocation.Name}
+		err := o.Read(&location, "Name")
 		if err == orm.ErrNoRows {
 			c.Data["json"] = &Response{Message: "No nearby shops"}
 		} else {
