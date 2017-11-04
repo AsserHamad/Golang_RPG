@@ -58,7 +58,7 @@ func (c *ShopsSearchController) Get() {
 					var message string = fmt.Sprintf("A nearby shop is located at %d meters away, get closer to access it :)", distance)
 					c.Data["json"] = &Response{Message: message}
 				} else if distance <= 5 {
-					c.Data["json"] = &Response{Message: "A nearby shop is just beside you. Type access to it!"}
+					c.Data["json"] = &Response{Message: "A nearby shop is just beside you. Type access to access it!"}
 					c.SetSession("nearShop", location.Id)
 				} else {
 					c.Data["json"] = &Response{Message: "No nearby shops!"}
