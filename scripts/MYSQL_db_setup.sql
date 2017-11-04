@@ -175,7 +175,7 @@ INSERT INTO bots (name, race, user_id, skill1_id) VALUES ('ArtBot', 'ART', 2, 2)
 INSERT INTO bots (name, race, user_id, skill1_id) VALUES ('MgtBot', 'MGT', 3, 3); # ID 3
 INSERT INTO bots (name, race, user_id, skill1_id) VALUES ('LawBot', 'LAW', 4, 4); # ID 4
 
-INSERT INTO locations (name, type) VALUES ('moar''s house', 'type1'); #ID 1
+INSERT INTO locations (name, type) VALUES ('Moar''s House', 'type1'); #ID 1
 INSERT INTO locations (name, type) VALUES ('location2', 'type2'); #ID 2
 INSERT INTO locations (name, type) VALUES ('location3', 'type3'); #ID 3
 
