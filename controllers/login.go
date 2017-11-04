@@ -22,8 +22,34 @@ type LoginController struct {
 	beego.Controller
 }
 
-type Success struct {
-	Message string `json: message`
+type SuccessWBot struct {
+	Message string       `json: "message"`
+	Bot     *models.Bots `json: "yourBot"`
+}
+
+type SuccessWOBot struct {
+	Message  string `json: "message"`
+	BotError string `json: "error"`
+}
+
+func getBot(c *LoginController, id int, name string, o orm.Ormer) {
+
+	bot := models.Bots{User_id: id}
+	err := o.Read(&bot, "User_id")
+	if err != nil {
+		_err := ""
+		if err == orm.ErrNoRows {
+			_err = "You don't have a bot!"
+		} else {
+			_err = err.Error()
+		}
+		c.Data["json"] = &SuccessWOBot{Message: "Welcome " + name + " !", BotError: _err}
+		c.Ctx.ResponseWriter.WriteHeader(401)
+	} else {
+		c.SetSession("inBattle", false)
+		c.SetSession("bot", &bot)
+		c.Data["json"] = &SuccessWBot{Message: "Welcome " + name + " !", Bot: &bot}
+	}
 }
 
 func (c *LoginController) Post() {
@@ -38,9 +64,8 @@ func (c *LoginController) Post() {
 		c.Ctx.ResponseWriter.WriteHeader(401)
 
 	} else {
-		c.SetSession("userId", user.Id)
-		c.Data["json"] = &Success{Message: "Welcome!"}
+		c.SetSession("id", user.Id)
+		getBot(c, user.Id, user.Name, o)
 	}
-
 	c.ServeJSON()
 }

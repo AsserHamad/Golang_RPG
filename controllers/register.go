@@ -30,15 +30,14 @@ func (c *RegisterController) Post() {
 	_, err := o.Insert(&x)
 	if err != nil {
 		fmt.Println(err)
-		ayesmvariable := myError{Message: err}
-		c.Data["json"] = &ayesmvariable
+		c.Data["json"] = &myError{Message: err}
 	} else {
 		fmt.Println("Added new entry to the DB!")
-		fmt.Println("status")
 		c.SetSession("id", x.Id)
 		id := c.GetSession("id")
 		fmt.Println("Your new ID iiiiiiiiiis")
 		fmt.Println(id)
+		//TODO: remove this JSON reply
 		c.Data["json"] = &x
 	}
 	c.ServeJSON()

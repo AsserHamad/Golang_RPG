@@ -14,6 +14,5 @@ func init() {
 	orm.RegisterModel(new(models.Bots))
 	orm.RegisterModel(new(models.Enemies))
 	orm.RegisterModel(new(models.Locations))
-	orm.RegisterModel(new(models.Items))
-	orm.RegisterModel(new(models.Shop_Items))
+	orm.RegisterModel(new(models.ShopItems), new(models.Items))
 }

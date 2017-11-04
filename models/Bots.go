@@ -9,6 +9,7 @@ type Bots struct {
 	Experience int    `json:"experience"`
 	Attack     int    `json:"attack"`
 	Defense    int    `json:"defense"`
-	Next_level int    `json:"next_level"`
 	Fakka      int    `json:"fakka"`
+	Maxhp      int    `json:"maxhp"`
+	Maxmp      int    `json:"maxmp"`
 }

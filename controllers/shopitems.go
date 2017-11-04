@@ -14,6 +14,10 @@ type NearestShopItemsController struct {
 	beego.Controller
 }
 
+type Response2 struct {
+	Response []*models.ShopItems `json:"message"`
+}
+
 func (c *NearestShopItemsController) Get() {
 	nearestShop := c.GetSession("nearShop")
 	if nearestShop == nil {
@@ -21,25 +25,22 @@ func (c *NearestShopItemsController) Get() {
 		c.Ctx.ResponseWriter.WriteHeader(errors.SearchForShop.HTTPStatus)
 	} else {
 		o := orm.NewOrm()
-		var shopItems []*models.Shop_Items
-		_, err := o.Raw("SELECT * FROM shop_items WHERE location_id = ?", nearestShop).QueryRows(&shopItems)
-		fmt.Println(shopItems[0].Item.Name)
+		var shopItems []*models.ShopItems
+		_, err := o.QueryTable("shop_items").Filter("LocationID", nearestShop).RelatedSel().All(&shopItems)
 		if err != nil {
-			fmt.Println(err.Error())
-		}
-		var stringItems []string
-		stringItems = append(stringItems, "[")
-		for _, x := range shopItems {
-			stringItems = append(stringItems, fmt.Sprintf(
-				"{Name: %s, Required Level: %d, Description: %s, Race: %s, Price: %d},",
-				x.Item.Name, x.Item.Required_level, x.Item.Description, x.Item.Race, x.Price))
-		}
-		if len(stringItems) > 1 {
-			stringItems[len(stringItems)-1] = "]"
+			c.Data["json"] = &Response{Message: err.Error()}
+			c.Ctx.ResponseWriter.WriteHeader(500)
 		} else {
-			stringItems = append(stringItems, "]")
+			var stringItems []string
+			for _, x := range shopItems {
+				stringItems = append(stringItems, fmt.Sprintf(
+					"Name: %s, Required Level: %d, Description: %s, Race: %s, Price: %d\n",
+					x.Item.Name, x.Item.RequiredLevel, x.Item.Description, x.Item.Race, x.Price))
+			}
+			c.Data["json"] = &Response{Message: "Available Items: " + strings.Join(stringItems, "")}
+			// use the own below me for easier readabiliy (pure json :3)
+			// c.Data["json"] = &Response2{Response: shopItems}
 		}
-		c.Data["json"] = &Response{Message: "Available Items: " + strings.Join(stringItems, "")}
+		c.ServeJSON(true)
 	}
-	c.ServeJSON(true)
 }
