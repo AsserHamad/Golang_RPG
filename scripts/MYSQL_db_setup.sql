@@ -58,6 +58,7 @@ create table enemies
 	ultSkill_id int NULL,
 	fakka int null,
 	drop_item int null,
+    power int default '0' null,
 	constraint name_UNIQUE
 		unique (name)
 )
@@ -95,6 +96,7 @@ create table items
 	name varchar(45) null,
 	description varchar(200) null,
 	race varchar(45) null,
+    type int not null,
 	price int default '20' null
 )
 ;
@@ -176,14 +178,16 @@ INSERT INTO bots (name, race, user_id, skill1_id) VALUES ('MgtBot', 'MGT', 3, 3)
 INSERT INTO bots (name, race, user_id, skill1_id) VALUES ('LawBot', 'LAW', 4, 4); # ID 4
 
 INSERT INTO locations (name, type) VALUES ('moar''s house', 'type1'); #ID 1
-INSERT INTO locations (name, type) VALUES ('location2', 'type2'); #ID 2
-INSERT INTO locations (name, type) VALUES ('location3', 'type3'); #ID 3
+INSERT INTO locations (name, type) VALUES ('location1', 'type2'); #ID 2
+INSERT INTO locations (name, type) VALUES ('location2', 'type3'); #ID 3
 
-INSERT INTO items (required_level, name, description, race, price) VALUES (1, 'axe of awesomeness', 'an axe only engs can use because of how complex it is', 'ENG', 10000);
+INSERT INTO items (required_level, name, description, race, type, price) VALUES (1, 'Health Potion', 'Restores 15% of your maximum health', '', 1, 100);
+INSERT INTO items (required_level, name, description, race, type, price) VALUES (1, 'axe of awesomeness', 'an axe only engs can use because of how complex it is', 'ENG', 2, 10000);
 
 INSERT INTO shop_items (location_id, item_id, price) VALUES (1, 1, 500000);
 
 
-INSERT INTO enemies (name, type, location, attack, defense, pp, agility, maxhp, fakka) VALUES ('enemy1', 1, 'location1', 10, 10, 10, 10, 10, 10); #ID 1
-INSERT INTO enemies (name, type, location, attack, defense, pp, agility, maxhp, fakka) VALUES ('enemy2', 2, 'location2', 20, 20, 20, 20, 20, 20); #ID 2
-INSERT INTO enemies (name, type, location, attack, defense, pp, agility, maxhp, fakka) VALUES ('enemy3', 3, 'location3', 30, 30, 30, 30, 30, 30); #ID 3
+INSERT INTO enemies (name, type,  attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Heartless', 1, 10, 10, 10, 10, 100, 100, 50); 					 #Normie Enemies
+INSERT INTO enemies (name, type,  attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Nobody', 1, 15, 15, 15, 15, 200, 200, 100);					 	 #Normie Enemies
+INSERT INTO enemies (name, type, location,  attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Ansem', 2, 'location1', 20, 20, 20, 20, 1000, 1000, 700); 	 #Boss Enemies
+INSERT INTO enemies (name, type, location, attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Xehanort', 2, 'location2', 20, 20, 20, 20, 1500, 2000, 1000);  #Boss Enemies
