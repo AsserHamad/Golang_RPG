@@ -1,0 +1,10 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [],
+	"rootPath": "github.com/AsserHamad/Golang_RPG.git",
+    	"heroku": {
+        "install" : [ "./..." ],
+        "goVersion": "go1.9"
+         }
+}
