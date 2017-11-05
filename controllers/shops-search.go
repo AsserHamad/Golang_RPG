@@ -20,7 +20,7 @@ type Response struct {
 	Message string `json:"message"`
 }
 
-func (c *ShopsSearchController) Get() {
+func (c *ChatController) ShopsSearchGet() {
 	latitude, _ := c.GetFloat("latitude")
 	longtitude, _ := c.GetFloat("longtitude")
 	c2, err := maps.NewClient(maps.WithAPIKey(beego.AppConfig.String("googlePlacesKey")))

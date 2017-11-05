@@ -7,10 +7,11 @@ import (
 )
 
 func init() {
-	beego.Router("/api/", &controllers.MainController{})
-	beego.Router("/api/register", &controllers.RegisterController{})
-	beego.Router("/api/login", &controllers.LoginController{})
-	beego.Router("/api/bot", &controllers.BotController{})
-	beego.Router("/api/search", &controllers.ShopsSearchController{}) // searches for nearest shops
-	beego.Router("/api/scan", &controllers.ScanController{})
+	//beego.Router("/api/", &controllers.MainController{})
+	//beego.Router("/api/register", &controllers.RegisterController{})
+	//beego.Router("/api/login", &controllers.LoginController{})
+	//beego.Router("/api/bot", &controllers.BotController{})
+	//beego.Router("/api/search", &controllers.ShopsSearchController{}) // searches for nearest shops
+	//beego.Router("/api/scan", &controllers.ScanController{})
+	beego.Router("/api/chat", &controllers.ChatController{})
 }

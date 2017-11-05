@@ -15,7 +15,7 @@ type Ayhabal struct {
 	Id int `json:"id"`
 }
 
-func (c *BotController) Post() {
+func (c *ChatController) BotPost(name string, race string) {
 
 	o := orm.NewOrm()
 	_id := c.GetSession("id")
@@ -25,8 +25,8 @@ func (c *BotController) Post() {
 		err := o.Read(&_bot)
 		if err != nil {
 			bot := models.Bots{
-				Name:    c.GetString("name"),
-				Race:    c.GetString("race"),
+				Name:    name,
+				Race:    race,
 				Level:   1,
 				User_id: id,
 				Attack:  10,

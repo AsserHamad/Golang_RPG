@@ -14,7 +14,7 @@ type we struct {
 	Message string `json: message`
 }
 
-func (c *BattleAttackController) Get() {
+func (c *ChatController) AttackGet() {
 	c.Data["json"] = we{Message: "attacking!"}
 	c.ServeJSON()
 }

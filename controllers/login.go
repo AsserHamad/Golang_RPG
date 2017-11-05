@@ -32,7 +32,7 @@ type SuccessWOBot struct {
 	BotError string `json: "error"`
 }
 
-func getBot(c *LoginController, id int, name string, o orm.Ormer) {
+func getBot(c *ChatController, id int, name string, o orm.Ormer) {
 
 	bot := models.Bots{User_id: id}
 	err := o.Read(&bot, "User_id")
@@ -52,10 +52,10 @@ func getBot(c *LoginController, id int, name string, o orm.Ormer) {
 	}
 }
 
-func (c *LoginController) Post() {
+func (c *ChatController) LoginPost(username string, password string) {
 
 	o := orm.NewOrm()
-	user := models.Users{Username: c.GetString("username"), Password: c.GetString("password")}
+	user := models.Users{Username: username, Password: password}
 	err := o.Read(&user, "Username", "Password")
 	user.Password = ""
 

@@ -17,15 +17,15 @@ type RegisterController struct {
 	beego.Controller
 }
 
-func (c *RegisterController) Post() {
+func (c *ChatController) RegisterPost(username string, password string, name string, age int) {
 
 	o := orm.NewOrm()
-	z, _ := StrToInt(c.GetString("age"))
+	//z, _ := StrToInt(c.GetString("age"))
 	x := models.Users{
-		Username: c.GetString("username"),
-		Password: c.GetString("password"),
-		Name:     c.GetString("name"),
-		Age:      z,
+		Username: username,
+		Password: password,
+		Name:     name,
+		Age:      age,
 	}
 	_, err := o.Insert(&x)
 	if err != nil {
