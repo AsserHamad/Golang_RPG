@@ -7,8 +7,9 @@ REM git config --global http.sslVerify false
 REM Installing bee
 go get github.com/beego/bee
 
-REM Govendor simulates package.json and helps in installing the required packages
+REM Govender simulates package.json and helps in installing the required packages
 go get -u github.com/kardianos/govendor
 
-REM MySQL Database driver vroom vroom
-go get -u github.com/go-sql-driver/mysql
+REM Maps and context for getting locations
+go get googlemaps.github.io\maps
+go get golang.org/x/net/context

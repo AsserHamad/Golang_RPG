@@ -18,3 +18,6 @@ var NoBot = Error{HTTPStatus: 401, Message: ErrorMessage{Message: "Please create
 var NotLoggedIn = Error{HTTPStatus: 401, Message: ErrorMessage{Message: "Please log in first"}}
 var HaveBot = Error{HTTPStatus: 401, Message: ErrorMessage{Message: "You already have a bot"}}
 var InvalidParameters = Error{HTTPStatus: 422, Message: ErrorMessage{Message: "Invalid Parameters"}}
+var SearchForShop = Error{HTTPStatus: 400, Message: ErrorMessage{Message: "You need to search for near shops first"}}
+var ItemNotFound = Error{HTTPStatus: 404, Message: ErrorMessage{Message: "Item not found in this shop"}}
+var NoEnoughFakka = Error{HTTPStatus: 403, Message: ErrorMessage{Message: "You don't have enough fakka to buy this item"}}

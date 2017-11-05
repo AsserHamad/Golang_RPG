@@ -47,7 +47,7 @@ func getBot(c *LoginController, id int, name string, o orm.Ormer) {
 		c.Ctx.ResponseWriter.WriteHeader(401)
 	} else {
 		c.SetSession("inBattle", false)
-		c.SetSession("bot", &bot)
+		c.SetSession("bot", bot)
 		c.Data["json"] = &SuccessWBot{Message: "Welcome " + name + " !", Bot: &bot}
 	}
 }

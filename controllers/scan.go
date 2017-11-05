@@ -42,6 +42,9 @@ func (c *ScanController) Post() {
 						} else {
 							fmt.Println(enemies[0])
 							enemy := models.TurnToEnemy(enemies[0])
+							c.SetSession("enemyCurrentHealth", enemy.Maxhp)
+							c.SetSession("playerCurrentHealth", c.GetSession("bot").(models.Bots).Maxhp)
+							c.SetSession("enemy", enemy)
 							c.Data["json"] = scan.EnterBattle("found random BOSS enemy woo", "boss", enemy)
 						}
 					} else {
@@ -53,14 +56,27 @@ func (c *ScanController) Post() {
 						} else {
 							fmt.Println(enemies[0])
 							enemy := models.TurnToEnemy(enemies[0])
+							player := c.GetSession("bot").(models.Bots)
+							c.SetSession("enemyCurrentHealth", enemy.Maxhp)
+							c.SetSession("playerCurrentHealth", player.Maxhp)
+							fmt.Println(player)
+							c.SetSession("enemy", enemy)
 							c.Data["json"] = scan.EnterBattle("found random enemy woo", "normal", enemy)
 						}
 					}
 				} else {
 					//10% chance of finding an item
 
-					item := scan.FoundItem("You found an item!", models.Items{})
-					c.Data["json"] = item
+					var items []orm.Params
+					_, err := o.Raw("SELECT * FROM items WHERE type = ? order by rand() limit 1", "1").Values(&items)
+					if err != nil {
+						c.Data["json"] = &errors.ErrorMessage{Message: err.Error()}
+					} else {
+						fmt.Println(items[0])
+						item := models.TurnToItem(items[0])
+						bot := c.GetSession("bot").(models.Bots)
+						c.Data["json"] = scan.FoundItem("Found an item!", item, bot.Id)
+					}
 				}
 			}
 

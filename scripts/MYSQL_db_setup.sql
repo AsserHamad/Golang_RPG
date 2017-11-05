@@ -74,7 +74,6 @@ create table inventory
 		primary key,
 	bot_id int not null,
 	item_id int not null,
-	quantity int default '1' null,
 	constraint inventory_ibfk_1
 		foreign key (bot_id) references bots (id)
 )
@@ -172,14 +171,14 @@ INSERT INTO skills (name, race, required_level) VALUES ('mgtSkill1', 'MGT', 1); 
 INSERT INTO skills (name, race, required_level) VALUES ('lawSkill1', 'LAW', 1); #ID 4
 INSERT INTO skills (name, race, required_level) VALUES ('engSkill4', 'ENG', 4); #ID 5
 
-INSERT INTO bots (name, race, user_id, skill1_id) VALUES ('EngBot', 'ENG', 1, 1); # ID 1
-INSERT INTO bots (name, race, user_id, skill1_id) VALUES ('ArtBot', 'ART', 2, 2); # ID 2
-INSERT INTO bots (name, race, user_id, skill1_id) VALUES ('MgtBot', 'MGT', 3, 3); # ID 3
-INSERT INTO bots (name, race, user_id, skill1_id) VALUES ('LawBot', 'LAW', 4, 4); # ID 4
+INSERT INTO bots (name, race, user_id, skill1_id, attack, defense) VALUES ('EngBot', 'ENG', 1, 1, 10, 15); # ID 1
+INSERT INTO bots (name, race, user_id, skill1_id, attack, defense) VALUES ('ArtBot', 'ART', 2, 2, 10, 15); # ID 2
+INSERT INTO bots (name, race, user_id, skill1_id, attack, defense) VALUES ('MgtBot', 'MGT', 3, 3, 10, 15); # ID 3
+INSERT INTO bots (name, race, user_id, skill1_id, attack, defense) VALUES ('LawBot', 'LAW', 4, 4, 10, 15); # ID 4
 
-INSERT INTO locations (name, type) VALUES ('moar''s house', 'type1'); #ID 1
-INSERT INTO locations (name, type) VALUES ('location1', 'type2'); #ID 2
-INSERT INTO locations (name, type) VALUES ('location2', 'type3'); #ID 3
+INSERT INTO locations (name, type) VALUES ('Moar''s House', 'type1'); #ID 1
+INSERT INTO locations (name, type) VALUES ('location2', 'type2'); #ID 2
+INSERT INTO locations (name, type) VALUES ('location3', 'type3'); #ID 3
 
 INSERT INTO items (required_level, name, description, race, type, price) VALUES (1, 'Health Potion', 'Restores 15% of your maximum health', '', 1, 100);
 INSERT INTO items (required_level, name, description, race, type, price) VALUES (1, 'axe of awesomeness', 'an axe only engs can use because of how complex it is', 'ENG', 2, 10000);
@@ -187,7 +186,7 @@ INSERT INTO items (required_level, name, description, race, type, price) VALUES 
 INSERT INTO shop_items (location_id, item_id, price) VALUES (1, 1, 500000);
 
 
-INSERT INTO enemies (name, type,  attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Heartless', 1, 10, 10, 10, 10, 100, 100, 50); 					 #Normie Enemies
-INSERT INTO enemies (name, type,  attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Nobody', 1, 15, 15, 15, 15, 200, 200, 100);					 	 #Normie Enemies
-INSERT INTO enemies (name, type, location,  attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Ansem', 2, 'location1', 20, 20, 20, 20, 1000, 1000, 700); 	 #Boss Enemies
-INSERT INTO enemies (name, type, location, attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Xehanort', 2, 'location2', 20, 20, 20, 20, 1500, 2000, 1000);  #Boss Enemies
+INSERT INTO enemies (name, type,  attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Heartless', 1, 10, 10, 10, 10, 1000, 100, 50); 					 #Normie Enemies
+INSERT INTO enemies (name, type,  attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Nobody', 1, 15, 15, 15, 15, 2000, 200, 100);					 	 #Normie Enemies
+INSERT INTO enemies (name, type, location,  attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Ansem', 2, 'location1', 20, 20, 20, 20, 10000, 1000, 700); 	 #Boss Enemies
+INSERT INTO enemies (name, type, location, attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Xehanort', 2, 'location2', 20, 20, 20, 20, 15000, 2000, 1000);  #Boss Enemies
