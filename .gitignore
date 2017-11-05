@@ -1,8 +1,4 @@
 *.exe
-<<<<<<< HEAD
-&.exe~
-=======
 *.exe~
->>>>>>> 452492dac2c4f75e839504a948427a09d740e116
 Golang_RPG
 vendor
