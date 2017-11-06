@@ -20,6 +20,32 @@ func EnemyTurn(c *BattleAttackController, enemy models.Enemies, player models.Bo
 	playerCurrentHealth, _ := c.GetSession("playerCurrentHealth").(int)
 	enemyCurrentHealth, _ := c.GetSession("enemyCurrentHealth").(int)
 
+	formula := enemy.Power / 2
+
+	playerCurrentHealth =
+		// playerCurrentHealth - (enemy.Power * (100 - (player.Defense / 500)))
+		playerCurrentHealth - formula
+	fmt.Println("Your health ", playerCurrentHealth)
+	if playerCurrentHealth <= 0 {
+		Lose(c)
+	} else {
+		c.SetSession("playerCurrentHealth", playerCurrentHealth)
+		c.SetSession("enemyCurrentHealth", enemyCurrentHealth)
+		c.Data["json"] = &Briefing{
+			MaxHealth:      player.Maxhp,
+			CurrentHealth:  playerCurrentHealth,
+			EnemyMaxHealth: enemy.Maxhp,
+			EnemyHealth:    enemyCurrentHealth,
+		}
+		c.ServeJSON()
+	}
+}
+
+func DEnemyTurn(c *BattleDefendController, enemy models.Enemies, player models.Bots) {
+	//TODO: Add boss/skill logic
+	playerCurrentHealth, _ := c.GetSession("playerCurrentHealth").(int)
+	enemyCurrentHealth, _ := c.GetSession("enemyCurrentHealth").(int)
+
 	formula := enemy.Power
 	if c.GetSession("playerDefending").(bool) == true {
 		formula /= 2
@@ -30,7 +56,7 @@ func EnemyTurn(c *BattleAttackController, enemy models.Enemies, player models.Bo
 		playerCurrentHealth - formula
 	fmt.Println("Your health ", playerCurrentHealth)
 	if playerCurrentHealth <= 0 {
-		Lose(c)
+		DLose(c)
 	} else {
 		c.SetSession("playerCurrentHealth", playerCurrentHealth)
 		c.SetSession("enemyCurrentHealth", enemyCurrentHealth)

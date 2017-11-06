@@ -27,13 +27,12 @@ func attack(c *BattleAttackController) {
 	enemyCurrentHealth, _ := c.GetSession("enemyCurrentHealth").(int)
 
 	rand.Seed(time.Now().UTC().UnixNano())
-	// random := rand.Intn(500)
-	// if random <= enemy.Agility {
-	// 	random = 0
-	// } else {
-	// 	random = 1
-	// }
-	random := rand.Intn(enemy.Agility)
+	random := rand.Intn(500)
+	if random <= enemy.Agility {
+		random = 0
+	} else {
+		random = 1
+	}
 
 	enemyCurrentHealth =
 		enemyCurrentHealth - (player.Attack-enemy.Defense/100)*random

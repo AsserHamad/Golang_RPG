@@ -183,7 +183,7 @@ INSERT INTO locations (name, type) VALUES ('location3', 'type3'); #ID 3
 INSERT INTO items (required_level, name, description, race, type, price) VALUES (1, 'Health Potion', 'Restores 15% of your maximum health', '', 1, 100);
 INSERT INTO items (required_level, name, description, race, type, price) VALUES (1, 'axe of awesomeness', 'an axe only engs can use because of how complex it is', 'ENG', 2, 10000);
 
-INSERT INTO shop_items (location_id, item_id, price) VALUES (1, 1, 500000);
+INSERT INTO shop_items (location_id, item_id, price) VALUES (1, 1, 5);
 
 
 INSERT INTO enemies (name, type,  attack, defense, pp, agility, maxhp, fakka, power) VALUES ('Heartless', 1, 10, 10, 10, 10, 1000, 100, 50); 					 #Normie Enemies

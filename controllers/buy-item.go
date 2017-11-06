@@ -36,18 +36,20 @@ func (c *BuyItemController) Get() {
 			c.Data["json"] = &errors.ItemNotFound.Message
 			c.Ctx.ResponseWriter.WriteHeader(errors.ItemNotFound.HTTPStatus)
 		} else {
-			bot := c.GetSession("bot").(*models.Bots)
-			if bot.Fakka < shopItem.Price {
+			bot := c.GetSession("bot").(models.Bots)
+			if bot.Fakka <= shopItem.Price {
 				c.Data["json"] = &errors.NoEnoughFakka.Message
 				c.Ctx.ResponseWriter.WriteHeader(errors.NoEnoughFakka.HTTPStatus)
 			} else {
 				bot.Fakka = bot.Fakka - shopItem.Price
+				fmt.Println("Bot fakka: ", bot.Fakka, " Item Price: ", shopItem.Price)
 				_, err = o.Update(&bot, "Fakka")
 				if err != nil {
 					c.Data["json"] = &Response{Message: err.Error()}
 					c.Ctx.ResponseWriter.WriteHeader(500)
 				} else {
 					c.Data["json"] = &Response{Message: "Done!"}
+					c.SetSession("nearShop", nil)
 				}
 			}
 		}
