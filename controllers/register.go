@@ -2,11 +2,9 @@ package controllers
 
 import (
 	"Golang_RPG/models"
-	"fmt"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 type myError struct {
@@ -28,16 +26,11 @@ func ChatRegister(username string, password string, name string, age int, c *Cha
 	}
 	_, err := o.Insert(&x)
 	if err != nil {
-		fmt.Println(err)
 		c.Data["json"] = &myError{Message: err}
 	} else {
-		fmt.Println("Added new entry to the DB!")
-		c.SetSession("id", x.Id)
-		id := c.GetSession("id")
-		fmt.Println("Your new ID iiiiiiiiiis")
-		fmt.Println(id)
-		//TODO: remove this JSON reply
-		c.Data["json"] = &x
+		c.Data["json"] = &Message{Message: "Congratulations, you just registered! Welcome, " + x.Name + ". \n" +
+			"You can use 'scan' to scan for nearby enemies or items, or you can type 'location' and enter your coordinates to look for shops",
+		}
 	}
 	c.ServeJSON()
 }

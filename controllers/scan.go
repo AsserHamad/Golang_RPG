@@ -45,7 +45,7 @@ func ChatScan(c *ChatController) {
 							c.SetSession("enemyCurrentHealth", enemy.Maxhp)
 							c.SetSession("playerCurrentHealth", c.GetSession("bot").(models.Bots).Maxhp)
 							c.SetSession("enemy", enemy)
-							c.Data["json"] = scan.EnterBattle("found random BOSS enemy woo", "boss", enemy)
+							c.Data["json"] = scan.EnterBattle("found random BOSS enemy! ", "boss", enemy)
 						}
 					} else {
 						//Found a normal enemy
@@ -61,7 +61,7 @@ func ChatScan(c *ChatController) {
 							c.SetSession("playerCurrentHealth", player.Maxhp)
 							fmt.Println(player)
 							c.SetSession("enemy", enemy)
-							c.Data["json"] = scan.EnterBattle("found random enemy woo", "normal", enemy)
+							c.Data["json"] = scan.EnterBattle("found a random normal enemy! ", "normal", enemy)
 						}
 					}
 				} else {
@@ -75,7 +75,7 @@ func ChatScan(c *ChatController) {
 						fmt.Println(items[0])
 						item := models.TurnToItem(items[0])
 						bot := c.GetSession("bot").(models.Bots)
-						c.Data["json"] = scan.FoundItem("Found an item!", item, bot.Id)
+						c.Data["json"] = scan.FoundItem("Found an item! ", item, bot.Id)
 					}
 				}
 			}

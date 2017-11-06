@@ -9,5 +9,5 @@ type Battle struct {
 }
 
 func EnterBattle(message string, _type string, enemy models.Enemies) *Battle {
-	return &Battle{Message: message, Type: _type, Enemy: enemy}
+	return &Battle{Message: message + enemy.Name, Type: _type, Enemy: enemy}
 }

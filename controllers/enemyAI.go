@@ -3,6 +3,7 @@ package controllers
 import (
 	"Golang_RPG/models"
 	"fmt"
+	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
 	// "github.com/astaxie/beego/logs"
@@ -31,11 +32,9 @@ func EnemyTurn(c *ChatController, enemy models.Enemies, player models.Bots) {
 	} else {
 		c.SetSession("playerCurrentHealth", playerCurrentHealth)
 		c.SetSession("enemyCurrentHealth", enemyCurrentHealth)
-		c.Data["json"] = &Briefing{
-			MaxHealth:      player.Maxhp,
-			CurrentHealth:  playerCurrentHealth,
-			EnemyMaxHealth: enemy.Maxhp,
-			EnemyHealth:    enemyCurrentHealth,
+		c.Data["json"] = &Message{
+			Message: player.Name + ": " + strconv.Itoa(playerCurrentHealth) + " / " + strconv.Itoa(player.Maxhp) +
+				"    " + enemy.Name + ": " + strconv.Itoa(enemyCurrentHealth) + " / " + strconv.Itoa(enemy.Maxhp),
 		}
 		c.ServeJSON()
 	}
@@ -57,11 +56,9 @@ func DEnemyTurn(c *ChatController, enemy models.Enemies, player models.Bots) {
 	} else {
 		c.SetSession("playerCurrentHealth", playerCurrentHealth)
 		c.SetSession("enemyCurrentHealth", enemyCurrentHealth)
-		c.Data["json"] = &Briefing{
-			MaxHealth:      player.Maxhp,
-			CurrentHealth:  playerCurrentHealth,
-			EnemyMaxHealth: enemy.Maxhp,
-			EnemyHealth:    enemyCurrentHealth,
+		c.Data["json"] = &Message{
+			Message: player.Name + ": " + strconv.Itoa(playerCurrentHealth) + " / " + strconv.Itoa(player.Maxhp) +
+				"    " + enemy.Name + ": " + strconv.Itoa(enemyCurrentHealth) + " / " + strconv.Itoa(enemy.Maxhp),
 		}
 		c.ServeJSON()
 	}

@@ -20,15 +20,13 @@ type Response struct {
 	Message string `json:"message"`
 }
 
-func (c *ShopsSearchController) Get() {
-	latitude, _ := c.GetFloat("latitude")
-	longtitude, _ := c.GetFloat("longtitude")
+func ChatSearch(latitude float64, longitude float64, c *ChatController) {
 	c2, err := maps.NewClient(maps.WithAPIKey(beego.AppConfig.String("googlePlacesKey")))
-	r := &maps.NearbySearchRequest{Location: &maps.LatLng{Lat: latitude, Lng: longtitude}, RankBy: "distance", Type: "stadium"}
+	r := &maps.NearbySearchRequest{Location: &maps.LatLng{Lat: latitude, Lng: longitude}, RankBy: "distance", Type: "stadium"}
 	resp, err := c2.NearbySearch(context.Background(), r)
 	if err != nil {
 		c.Data["json"] = &errors.InvalidParameters.Message
-		fmt.Println(err.Error())
+		fmt.Println("the err is ", err)
 		c.Ctx.ResponseWriter.WriteHeader(errors.InvalidParameters.HTTPStatus)
 	} else {
 		nearestLocation := resp.Results[0]
@@ -42,7 +40,7 @@ func (c *ShopsSearchController) Get() {
 				latitudeOfNearest   string = strconv.FormatFloat(nearestLocation.Geometry.Location.Lat, 'f', -1, 64)
 				longtitudeOfNearest string = strconv.FormatFloat(nearestLocation.Geometry.Location.Lng, 'f', -1, 64)
 				destination         string = latitudeOfNearest + "," + longtitudeOfNearest
-				origin              string = c.GetString("latitude") + "," + c.GetString("longtitude")
+				origin              string = strconv.FormatFloat(latitude, 'f', 6, 64) + "," + strconv.FormatFloat(longitude, 'f', 6, 64)
 			)
 
 			c2, err := maps.NewClient(maps.WithAPIKey(beego.AppConfig.String("googleDistanceKey")))

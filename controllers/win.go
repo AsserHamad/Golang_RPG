@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"Golang_RPG/models"
+	"strconv"
 )
 
 type win struct {
@@ -13,6 +14,6 @@ type win struct {
 func Win(c *ChatController) {
 	enemy := c.GetSession("enemy").(models.Enemies)
 	c.SetSession("inBattle", false)
-	c.Data["json"] = &win{Message: "You won!", Enemy: enemy, Fakka: enemy.Fakka}
+	c.Data["json"] = &Message{Message: "You won! You gained " + strconv.Itoa(enemy.Fakka) + " Fakka!"}
 	c.ServeJSON()
 }

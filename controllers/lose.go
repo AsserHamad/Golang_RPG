@@ -5,13 +5,13 @@ type lose struct {
 }
 
 func Lose(c *ChatController) {
-	c.Data["json"] = &lose{Message: "You lose..."}
+	c.Data["json"] = &Message{Message: "You lose..."}
 	c.ServeJSON()
 
 }
 
 func DLose(c *ChatController) {
-	c.Data["json"] = &lose{Message: "You lose..."}
+	c.Data["json"] = &Message{Message: "You lose..."}
 	c.SetSession("inBattle", false)
 	c.ServeJSON()
 

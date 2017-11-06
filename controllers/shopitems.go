@@ -18,7 +18,7 @@ type Response2 struct {
 	Response []*models.ShopItems `json:"message"`
 }
 
-func (c *NearestShopItemsController) Get() {
+func ChatShop(c *ChatController) {
 	nearestShop := c.GetSession("nearShop")
 	if nearestShop == nil {
 		c.Data["json"] = &errors.SearchForShop.Message

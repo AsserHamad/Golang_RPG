@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"Golang_RPG/models"
-	"fmt"
 	"math/rand"
 	"time"
 
@@ -13,11 +12,6 @@ import (
 
 type BattleAttackController struct {
 	beego.Controller
-}
-
-type we struct {
-	Message string         `json: message`
-	Enemy   models.Enemies `json:"enemies"`
 }
 
 func attack(c *ChatController) {
@@ -34,9 +28,7 @@ func attack(c *ChatController) {
 		random = 1
 	}
 
-	enemyCurrentHealth =
-		enemyCurrentHealth - (player.Attack-enemy.Defense/100)*random
-	fmt.Println("Enemy health ", enemyCurrentHealth, "(calcuation)", (player.Attack-enemy.Defense/100)*random)
+	enemyCurrentHealth = enemyCurrentHealth - (player.Attack-enemy.Defense/100)*random
 
 	if enemyCurrentHealth <= 0 {
 		Win(c)

@@ -13,8 +13,9 @@ var checkForAuthorization = func(ctx *context.Context) {
 
 	// ctx.ResponseWriter.Header().Add("Access-Control-Allow-Origin", "*")
 	// ctx.ResponseWriter.Header().Add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-
-	subUrl := strings.Split(ctx.Request.URL.Path, "api/")[1]
+	ctx.Output.Header("Access-Control-Allow-Origin", "*")
+	subUrl := strings.Split(ctx.Request.URL.Path, "/")[1]
+	println(subUrl)
 	if subUrl == "login" || subUrl == "register" || subUrl == "welcome" || subUrl == "chat" {
 		return
 	}
@@ -29,14 +30,14 @@ var checkForAuthorization = func(ctx *context.Context) {
 
 func init() {
 	beego.InsertFilter("/*", beego.BeforeRouter, checkForAuthorization)
-	beego.Router("/api/welcome", &controllers.MainController{})
-	beego.Router("/api/register", &controllers.RegisterController{})
-	beego.Router("/api/login", &controllers.LoginController{})
-	beego.Router("/api/bot", &controllers.BotController{})
-	beego.Router("/api/search", &controllers.ShopsSearchController{})                 // searches for nearest shops
-	beego.Router("/api/shops/nearestshop", &controllers.NearestShopItemsController{}) // uses result from nearest shop search to display items
-	beego.Router("/api/scan", &controllers.ScanController{})
-	beego.Router("/api/buyitem", &controllers.BuyItemController{})
+	beego.Router("welcome", &controllers.MainController{})
+	beego.Router("register", &controllers.RegisterController{})
+	beego.Router("login", &controllers.LoginController{})
+	beego.Router("bot", &controllers.BotController{})
+	beego.Router("search", &controllers.ShopsSearchController{})                 // searches for nearest shops
+	beego.Router("shops/nearestshop", &controllers.NearestShopItemsController{}) // uses result from nearest shop search to display items
+	beego.Router("scan", &controllers.ScanController{})
+	beego.Router("buyitem", &controllers.BuyItemController{})
 
-	beego.Router("/api/chat", &controllers.ChatController{})
+	beego.Router("chat", &controllers.ChatController{})
 }

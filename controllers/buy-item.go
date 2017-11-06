@@ -13,8 +13,15 @@ type BuyItemController struct {
 	beego.Controller
 }
 
-func (c *BuyItemController) Get() {
-	var itemName string = c.GetString("name")
+func ChatBuy(c *ChatController, name string) {
+	if c.GetSession("nearShop") == nil {
+		fmt.Print(c.GetSession("nearShop"))
+		c.Data["json"] = &Message{Message: "search again for shop"}
+		c.Ctx.ResponseWriter.WriteHeader(403)
+		c.ServeJSON()
+		return
+	}
+	var itemName string = name
 	o := orm.NewOrm()
 	item := models.Items{Name: itemName}
 	err := o.Read(&item, "Name")
