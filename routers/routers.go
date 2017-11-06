@@ -15,7 +15,7 @@ var checkForAuthorization = func(ctx *context.Context) {
 	// ctx.ResponseWriter.Header().Add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
 
 	subUrl := strings.Split(ctx.Request.URL.Path, "api/")[1]
-	if subUrl == "login" || subUrl == "register" || subUrl == "welcome" {
+	if subUrl == "login" || subUrl == "register" || subUrl == "welcome" || subUrl == "chat" {
 		return
 	}
 
@@ -37,4 +37,6 @@ func init() {
 	beego.Router("/api/shops/nearestshop", &controllers.NearestShopItemsController{}) // uses result from nearest shop search to display items
 	beego.Router("/api/scan", &controllers.ScanController{})
 	beego.Router("/api/buyitem", &controllers.BuyItemController{})
+
+	beego.Router("/api/chat", &controllers.ChatController{})
 }

@@ -18,7 +18,7 @@ type ScanController struct {
 	beego.Controller
 }
 
-func (c *ScanController) Post() {
+func ChatScan(c *ChatController) {
 	o := orm.NewOrm()
 	if c.GetSession("id") != nil && c.GetSession("bot") != nil {
 		if c.GetSession("inBattle") == false {

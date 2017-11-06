@@ -31,7 +31,9 @@ func (c *BotController) Post() {
 				User_id: id,
 				Attack:  10,
 				Defense: 10,
-				Fakka:   10,
+				Fakka:   100,
+				Maxhp:   1000,
+				Maxmp:   1000,
 			}
 			_, err := o.Insert(&bot)
 			if err != nil {
